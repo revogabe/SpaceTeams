@@ -19,7 +19,7 @@ import { ListEmpty } from "@components/ListEmpty"
 
 export function Players() {
   const [team, setTeam] = useState("Time A")
-  const [players, setPlayers] = useState(["Daniel Gabriel", "Diogo Silva"])
+  const [players, setPlayers] = useState([])
 
   return (
     <Container>
