@@ -6,10 +6,10 @@ import {
 
 import { Loading } from "@components/Loading"
 
-import { ThemeProvider } from "styled-components"
+import { ThemeProvider } from "styled-components/native"
 import theme from "@theme/index"
 
-import { Groups } from "@screens/Groups"
+import { Routes } from "@routes/index"
 import { StatusBar } from "react-native"
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Groups /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   )
 }
