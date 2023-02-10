@@ -43,5 +43,5 @@ export const BubbleNumberPlayers = styled.View`
   height: 28px;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 9999px;
 `
