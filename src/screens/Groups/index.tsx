@@ -28,6 +28,10 @@ export function Groups() {
     }
   }
 
+  function handleOpenGroup(groups: string) {
+    navigation.navigate("players", { groups })
+  }
+
   useFocusEffect(
     useCallback(() => {
       fetchGroups()
@@ -42,10 +46,14 @@ export function Groups() {
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <GroupCard title={item} />}
+        renderItem={({ item }) => (
+          <GroupCard title={item} onPress={() => handleOpenGroup(item)} />
+        )}
         ListEmptyComponent={() => (
           <ListEmpty message="Cadastre sua primeira turma!" />
         )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={[{ paddingBottom: 25 }]}
       />
 
       <Button title="Criar nova turma" onPress={handleNewGroup} />

@@ -17,6 +17,10 @@ export function NewGroup() {
 
   async function handleSubmit() {
     try {
+      if (groups.trim().length === 0) {
+        return Alert.alert("Erro", "Informe o nome da turma")
+      }
+
       await groupCreate(groups)
       navigation.navigate("players", { groups })
     } catch (error) {
