@@ -1,16 +1,31 @@
+import { useState } from "react"
+import { useNavigation } from "@react-navigation/native"
+
 import { Button } from "@components/Button"
 import { Header } from "@components/Header"
 import { Highlight } from "@components/Highlight"
 import { Input } from "@components/Input"
-import { useNavigation } from "@react-navigation/native"
-import { TextInput } from "react-native"
 import { Container, Content, Icon } from "./styles"
+import { groupCreate } from "@storage/group/groupCreate"
+import { AppError } from "@utils/AppError"
+import { Alert } from "react-native"
 
 export function NewGroup() {
+  const [groups, setGroups] = useState("")
+
   const navigation = useNavigation()
 
-  function handleSubmit() {
-    navigation.navigate("players", { groups: "Galera da Empresa" })
+  async function handleSubmit() {
+    try {
+      await groupCreate(groups)
+      navigation.navigate("players", { groups })
+    } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert("Novo Grupo", error.message)
+      } else {
+        Alert.alert("Novo Grupo", "Não foi possível criar o grupo")
+      }
+    }
   }
 
   return (
@@ -23,7 +38,7 @@ export function NewGroup() {
           title="Nova Turma"
           subtitle="crie uma turma para adicionar pessoas"
         />
-        <Input placeholder="Nome da turma" />
+        <Input placeholder="Nome da turma" onChangeText={setGroups} />
         <Button
           title="Criar"
           style={{ marginTop: 20 }}
